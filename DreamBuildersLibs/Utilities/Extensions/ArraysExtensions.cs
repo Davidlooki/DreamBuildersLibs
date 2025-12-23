@@ -2,6 +2,10 @@ namespace DreamBuildersLibs;
 
 public static class ArraysExtensions
 {
+    [ThreadStatic]
+    private static Random? _localRandom;
+    private static Random Random => _localRandom ??= new Random();
+    
     /// <summary>
     /// Based on the Fisher-Yates shuffle.
     /// </summary>
@@ -11,7 +15,8 @@ public static class ArraysExtensions
         {
             byte[] box = new byte[1];
 
-            do Random.Shared.NextBytes(box);
+            //do Random.Shared.NextBytes(box);
+            do Random.NextBytes(box);
             while (!(box[0] < i * (byte.MaxValue / i)));
 
             int k = (box[0] % i);

@@ -2,6 +2,10 @@ namespace DreamBuildersLibs;
 
 public static class StringExtensions
 {
+    [ThreadStatic]
+    private static Random? _localRandom;
+    private static Random Random => _localRandom ??= new Random();
+    
     public static string Reverse(this string str)
     {
         char[] array = str.ToCharArray();

@@ -2,6 +2,10 @@ namespace DreamBuildersLibs;
 
 public static class EnumerableExtensions
 {
+    [ThreadStatic]
+    private static Random? _localRandom;
+    private static Random Random => _localRandom ??= new Random();
+    
     /// <summary>
     /// Check if elements in two collections match.
     /// </summary>
@@ -58,7 +62,8 @@ public static class EnumerableExtensions
     {
         var sequenceArray = sequence.ToArray();
 
-        return sequenceArray.ToArray()[Random.Shared.Next(0, sequenceArray.Length)];
+        //return sequenceArray.ToArray()[Random.Shared.Next(0, sequenceArray.Length)];
+        return sequenceArray.ToArray()[Random.Next(0, sequenceArray.Length)];
     }
 
     /// <returns>
@@ -121,7 +126,8 @@ public static class EnumerableExtensions
         {
             byte[] box = new byte[1];
 
-            do Random.Shared.NextBytes(box);
+            //do Random.Shared.NextBytes(box);
+            do Random.NextBytes(box);
             while (!(box[0] < i * (byte.MaxValue / i)));
 
             int k = (box[0] % i);
