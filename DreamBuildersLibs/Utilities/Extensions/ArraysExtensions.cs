@@ -33,7 +33,7 @@ public static class ArraysExtensions
     /// </summary>
     public static T[] Swap<T>(this T[] sequence, int indexA, int indexB)
     {
-        if (sequence.Length > indexA && sequence.Length > indexB)
+        if (sequence.Length <= indexA || sequence.Length <= indexB)
             throw new Exception("One of indexes are greater than given sequence.");
 
         (sequence[indexA], sequence[indexB]) = (sequence[indexB], sequence[indexA]);

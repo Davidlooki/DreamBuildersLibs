@@ -44,7 +44,7 @@ public static class ListExtensions
     /// </summary>
     public static IList<T> Swap<T>(this IList<T> sequence, int indexA, int indexB)
     {
-        if (sequence.Count > indexA && sequence.Count > indexB)
+        if (sequence.Count <= indexA && sequence.Count <= indexB)
             throw new Exception("One of indexes are greater than given sequence.");
 
         (sequence[indexA], sequence[indexB]) = (sequence[indexB], sequence[indexA]);
